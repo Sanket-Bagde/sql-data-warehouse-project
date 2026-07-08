@@ -32,7 +32,8 @@ SELECT
     COUNT(*) 
 FROM silver.crm_cust_info
 GROUP BY cst_id
-HAVING COUNT(*) > 1 OR cst_id IS NULL;
+HAVING COUNT(*) > 1 
+OR cst_id IS NULL;
 
 -- Check for Unwanted Spaces
 -- Expectation: No Results
@@ -56,7 +57,8 @@ prd_id,
 COUNT(*)
 FROM bronze.crm_prd_info
 GROUP BY prd_id
-HAVING COUNT(*)>1 or prd_id IS NULL
+HAVING COUNT(*)>1 
+OR prd_id IS NULL
 
 ---Check for NULLs or Negative Numbers 
 ---Expectation: No Results
@@ -156,7 +158,9 @@ ORDER BY cntry
 -------------------------------------
 ----Check for unwanted spaces
 SELECT * FROM bronze.erp_px_cat_g1v2
-WHERE cat != TRIM(cat) OR subcat != TRIM(subcat) OR maintenance != TRIM(maintenance)
+WHERE cat != TRIM(cat) 
+OR subcat != TRIM(subcat) 
+OR maintenance != TRIM(maintenance)
 
 ----Data Consistency and Standardization
 
