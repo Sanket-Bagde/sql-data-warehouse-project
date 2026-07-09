@@ -52,13 +52,13 @@ BEGIN
 
 			CASE WHEN UPPER(TRIM(cst_marital_status))='S' THEN 'Single'
 				 WHEN UPPER(TRIM(cst_marital_status))='M' THEN 'Married'
-				 ELSE 'Unknown'
+				 ELSE 'n\a'
 			END AS cst_marital_status,--- Normalize marital status values to readable format
 
 			CASE
 				WHEN UPPER(TRIM(cst_gndr))='F' THEN 'Female'
 				WHEN UPPER(TRIM(cst_gndr))='M' THEN 'Male'
-				ELSE 'Unknown'
+				ELSE 'n\a'
 			END AS cst_gndr,--- Normalize gender values to readable format
 
 			cst_create_date
@@ -183,7 +183,7 @@ BEGIN
 
 		CASE WHEN UPPER(TRIM(gen)) IN ('M' , 'MALE') THEN 'Male'
 			 WHEN UPPER(TRIM(gen)) IN ('F' , 'FEMALE') THEN 'Female'
-			 ELSE 'n/a'
+			 ELSE 'n\a'
 		END AS gen ---- Normalize gender values and handle unknown cases
 		FROM bronze.erp_cust_az12
 		SET @end_time= GETDATE();
@@ -204,7 +204,7 @@ BEGIN
 		REPLACE(cid, '-', '') cid,
 		CASE WHEN TRIM(cntry) = 'DE' THEN 'Germany'
 			 WHEN TRIM(cntry) IN ('US','USA') THEN 'United States'
-			 WHEN TRIM(cntry) = '' OR cntry IS NULL THEN 'n/a'
+			 WHEN TRIM(cntry) = '' OR cntry IS NULL THEN 'n\a'
 			 ELSE TRIM(cntry)
 		END AS cntry  --- Normalize and Handle missing or blank country codes
 		FROM bronze.erp_loc_a101
